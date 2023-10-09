@@ -1,0 +1,42 @@
+@startuml
+title
+Model
+endtitle
+class org.example.susanna.MyRequest << (T,yellow) >> {
+   + String input
+}
+org.example.susanna.MyRequest --|> org.accordproject.runtime.Request
+class org.example.susanna.MyResponse << (T,yellow) >> {
+   + String output
+}
+org.example.susanna.MyResponse --|> org.accordproject.runtime.Response
+class org.example.susanna.MyContract << (A,green) >> {
+   + String name
+}
+org.example.susanna.MyContract --|> org.accordproject.contract.Contract
+class org.accordproject.contract.Contract << (A,green) >> {
+   + String contractId
+}
+org.accordproject.contract.Contract --|> concerto.Asset
+class org.accordproject.contract.Clause << (A,green) >> {
+   + String clauseId
+}
+org.accordproject.contract.Clause --|> concerto.Asset
+class org.accordproject.runtime.Request << (T,yellow) >> {
+}
+org.accordproject.runtime.Request --|> concerto.Transaction
+class org.accordproject.runtime.Response << (T,yellow) >> {
+}
+org.accordproject.runtime.Response --|> concerto.Transaction
+class org.accordproject.runtime.Obligation {
+   + String $identifier
+   + Contract contract
+   + Participant promisor
+   + Participant promisee
+   + DateTime deadline
+}
+org.accordproject.runtime.Obligation --|> concerto.Event
+class org.accordproject.runtime.State << (A,green) >> {
+}
+org.accordproject.runtime.State --|> concerto.Asset
+@enduml

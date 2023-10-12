@@ -12,11 +12,10 @@
  * limitations under the License.
  */
 
-namespace org.example.susanna
+namespace org.example.water
 
-contract MyLogic over MyContract {
-  // Simple Clause
-  clause helloworld(request : MyRequest) : MyResponse {
-    return MyResponse{ output: "Hello " ++ contract.name ++ " " ++ request.input }
+contract Empty over WaterSupplyAgreement {
+  clause donothing(request : WaterSupplyRequest) : WaterSupplyResponse {
+    return WaterSupplyResponse{ output: "Hello " ++ request.input}
   }
 }

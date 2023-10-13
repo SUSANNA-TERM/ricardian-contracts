@@ -1,22 +1,32 @@
-namespace org.example.susanna
+namespace org.example.water
 
 import org.accordproject.contract.* from https://models.accordproject.org/accordproject/contract.cto
 import org.accordproject.runtime.* from https://models.accordproject.org/accordproject/runtime.cto
 
-transaction MyRequest extends Request {
-  o String input
+asset WaterSupplyAgreement extends Contract {
+  o String city
+  o DateTime startDateOfContract
+  o String supplier
+  o String consumerName
+  o Integer consumerVatNumber
+  o DateTime applicationDate
+  o Integer agreementId
+  o String apartmentAddress
+  o Integer floor
+  o Integer waterMeterNumber
+  o Integer billingCycleDays  // Number of days for every bill
+  o Integer invoicePaymentDays
+  o Double supplyThreshold // Supply threshold in liters per day
+  o Double leakNotificationLimit
 }
 
-transaction MyResponse extends Response {
-  o String output
+// Request
+transaction WaterSupplyRequest extends Request {
+    o String input
 }
 
-/**
- * The model for the contract
- */
-asset MyContract extends Contract {
-  /**
-   * The name for the contract
-   */
-  o String name
+// Response
+transaction WaterSupplyResponse extends Response {
+   o String output
 }
+

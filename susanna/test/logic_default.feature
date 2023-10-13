@@ -1,4 +1,4 @@
-Feature: HelloWorld
+Feature: Water Supply
   This describe the expected behavior for an Accord Project's template
 
   Background:
@@ -9,8 +9,8 @@ Feature: HelloWorld
     Then it should respond with
 """
 {
-    "$class": "org.example.susanna.MyResponse",
-    "output": "Hello Dan World"
+    "$class": "org.example.water.WaterSupplyResponse",
+    "output": "Hello World"
 }
 """
 

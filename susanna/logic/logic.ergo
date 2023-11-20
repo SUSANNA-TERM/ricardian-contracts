@@ -11,11 +11,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 namespace org.example.water
 
 contract Empty over WaterSupplyAgreement {
-  clause donothing(request : WaterSupplyRequest) : WaterSupplyResponse {
-    return WaterSupplyResponse{ output: "Hello " ++ request.input}
+    clause donothing(request : WaterSupplyRequest) : WaterSupplyResponse {
+      return WaterSupplyResponse{ output: "Hello " ++ request.input }
+    }
+  
+    clause checkSupplyThreshold(request : SupplyCheckRequest) : SupplyCheckResponse {
+        if request.consumption > contract.supplyThreshold 
+        then return SupplyCheckResponse{ message: "Consumption exceeds the supply threshold." }
+        else return SupplyCheckResponse{ message: "Consumption is within the supply threshold." }
   }
+
+    clause checkLeakNotification(request : LeakCheckRequest) : LeakCheckResponse {
+        if (request.consumption > contract.leakNotificationLimit)
+        then return LeakCheckResponse{ message: "Leak likely: consumption exceeds leak notification limit." }
+        else return LeakCheckResponse{ message: "No leak detected." }
+    }
+
+    clause checkInvoicePayment(request : PaymentCheckRequest) : PaymentCheckResponse {
+        if (request.daysLate > contract.invoicePaymentDays)
+        then return PaymentCheckResponse{ message: "Payment is overdue. Contract at risk of termination." }
+        else return PaymentCheckResponse{ message: "Payment is within the acceptable timeframe." }
+    }
+
+    clause calculateCost(request : ConsumptionDataRequest) : ConsumptionDataResponse {
+        let cost = request.consumptionData * contract.literPrice;
+        return ConsumptionDataResponse{ consumptionCost: cost }
+    }
 }

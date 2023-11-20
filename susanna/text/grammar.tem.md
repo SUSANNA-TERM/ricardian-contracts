@@ -15,7 +15,7 @@ With this contract, the Supplier agrees to supply water to the Consumer for use 
 
 Bills will be issued every {{billingCycleDays}} days from the start date of {{startDateOfContract}}.
 
-Consumer has obligation to pay the invoices issued by {{supplier}} within the set deadline from the issuance of the invoice which is set at {{invoicePaymentDays}} days.
+Consumer has obligation to pay the invoices issued by {{supplier}} within the set deadline from the issuance of the invoice which is set at {{invoicePaymentDays}} days. The price per liter is {{literPrice}}.
 
 Supply Threshold: The Consumer will notified if the supply exceeds {{supplyThreshold}} liters per day.
 

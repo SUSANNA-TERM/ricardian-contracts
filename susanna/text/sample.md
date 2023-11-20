@@ -16,7 +16,7 @@ With this contract, the Supplier agrees to supply water to the Consumer for use 
 
 Bills will be issued every 4 days from the start date of 10/13/2023.
 
-Consumer has obligation to pay the invoices issued by "DEYZ" within the set deadline from the issuance of the invoice which is set at 30 days.
+Consumer has obligation to pay the invoices issued by "DEYZ" within the set deadline from the issuance of the invoice which is set at 30 days. The price per liter is 5.
 
 Supply Threshold: The Consumer will notified if the supply exceeds 20 liters per day.
 

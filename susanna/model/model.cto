@@ -14,19 +14,50 @@ asset WaterSupplyAgreement extends Contract {
   o String apartmentAddress
   o Integer floor
   o Integer waterMeterNumber
+  o Double literPrice
   o Integer billingCycleDays  // Number of days for every bill
   o Integer invoicePaymentDays
   o Double supplyThreshold // Supply threshold in liters per day
   o Double leakNotificationLimit
 }
 
-// Request
 transaction WaterSupplyRequest extends Request {
     o String input
 }
 
-// Response
 transaction WaterSupplyResponse extends Response {
    o String output
 }
 
+
+transaction SupplyCheckRequest extends Request {
+  o Double consumption
+}
+
+transaction SupplyCheckResponse extends Response {
+  o String message
+}
+
+transaction LeakCheckRequest extends Request {
+  o Double consumption
+}
+
+transaction LeakCheckResponse extends Response {
+  o String message
+}
+
+transaction PaymentCheckRequest extends Request {
+  o Integer daysLate
+}
+
+transaction PaymentCheckResponse extends Response {
+  o String message
+}
+
+transaction ConsumptionDataRequest extends Request {
+  o Double consumptionData
+}
+
+transaction ConsumptionDataResponse extends Response {
+  o Double consumptionCost
+}

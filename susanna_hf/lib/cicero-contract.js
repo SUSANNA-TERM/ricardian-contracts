@@ -33,32 +33,46 @@ class CiceroContract extends Contract {
         this.templates['default'] = template;
         console.log(`Loaded template: ${template.getIdentifier()}`);
   
-        return this.templates;
+        return template;
     }
 
-    // Method to initialize the contract with a template
-    async initialize(ctx) {
-        this.templates = await this.loadTemplate(ctx);
-        console.log('Contract has been initialized with the template');
-        return `Initialized ${this.templates}`;
-    }
-
-    // Method to trigger a clause in the contract
-    async trigger(ctx, requestData) {
-        const template = this.templates['default'];
-        if (!template) {
-            throw new Error('Template not loaded');
-        }
-
-        const clause = new Clause(template);
-        clause.parse(requestData);
-
+    async handleWaterSupplyRequest(ctx, requestDetails) {
+        // Load the template as before
+        const template = await this.loadTemplate(ctx);
+    
+        // Create an instance of the Cicero Engine
         const engine = new Engine();
-        const result = await engine.trigger(clause, { content: requestData }, null);
+    
+        const markdown = fs.readFileSync(
+            path.resolve(__dirname,"sample.md"),
+            "utf8"
+          );
 
-        console.log(`Trigger result: ${JSON.stringify(result)}`);
-        return JSON.stringify(result.response);
+        // Create a request transaction object
+        const request = { $class: "org.example.water.WaterSupplyRequest", input: "test" };
+    
+            // Create an instance of Clause with the template
+        const clause = new Clause(template);
+        // // Ensure requestDetails is the actual contract text that matches the template structure
+        clause.parse(markdown);
+
+        // Now you can safely call getData
+        const clauseData = clause.getData();
+        const state = {
+            $class: "org.accordproject.runtime.State",
+          };
+
+        // Execute the contract logic
+        const result = await engine.trigger(clause, request, state, null);
+    
+        // Handle the response and update the blockchain state as necessary
+        const response = result.response;
+        console.log(`Response: ${response.status}`);
+    
+        // Return or process the response as needed
+        return response;
     }
+
 }
 
 module.exports = CiceroContract;

@@ -1,0 +1,88 @@
+@startuml
+title
+Model
+endtitle
+class org.example.water.WaterSupplyAgreement << (A,green) >> {
+   + String city
+   + DateTime startDateOfContract
+   + String supplier
+   + String consumerName
+   + Integer consumerVatNumber
+   + DateTime applicationDate
+   + Integer agreementId
+   + String apartmentAddress
+   + Integer floor
+   + Integer waterMeterNumber
+   + Double literPrice
+   + Integer billingCycleDays
+   + Integer invoicePaymentDays
+   + Double supplyThreshold
+   + Double leakNotificationLimit
+}
+org.example.water.WaterSupplyAgreement --|> org.accordproject.contract.Contract
+class org.example.water.WaterSupplyRequest << (T,yellow) >> {
+   + String input
+}
+org.example.water.WaterSupplyRequest --|> org.accordproject.runtime.Request
+class org.example.water.WaterSupplyResponse << (T,yellow) >> {
+   + String output
+}
+org.example.water.WaterSupplyResponse --|> org.accordproject.runtime.Response
+class org.example.water.SupplyCheckRequest << (T,yellow) >> {
+   + Double consumption
+}
+org.example.water.SupplyCheckRequest --|> org.accordproject.runtime.Request
+class org.example.water.SupplyCheckResponse << (T,yellow) >> {
+   + String message
+}
+org.example.water.SupplyCheckResponse --|> org.accordproject.runtime.Response
+class org.example.water.LeakCheckRequest << (T,yellow) >> {
+   + Double consumption
+}
+org.example.water.LeakCheckRequest --|> org.accordproject.runtime.Request
+class org.example.water.LeakCheckResponse << (T,yellow) >> {
+   + String message
+}
+org.example.water.LeakCheckResponse --|> org.accordproject.runtime.Response
+class org.example.water.PaymentCheckRequest << (T,yellow) >> {
+   + Integer daysLate
+}
+org.example.water.PaymentCheckRequest --|> org.accordproject.runtime.Request
+class org.example.water.PaymentCheckResponse << (T,yellow) >> {
+   + String message
+}
+org.example.water.PaymentCheckResponse --|> org.accordproject.runtime.Response
+class org.example.water.ConsumptionDataRequest << (T,yellow) >> {
+   + Double consumptionData
+}
+org.example.water.ConsumptionDataRequest --|> org.accordproject.runtime.Request
+class org.example.water.ConsumptionDataResponse << (T,yellow) >> {
+   + Double consumptionCost
+}
+org.example.water.ConsumptionDataResponse --|> org.accordproject.runtime.Response
+class org.accordproject.contract.Contract << (A,green) >> {
+   + String contractId
+}
+org.accordproject.contract.Contract --|> concerto.Asset
+class org.accordproject.contract.Clause << (A,green) >> {
+   + String clauseId
+}
+org.accordproject.contract.Clause --|> concerto.Asset
+class org.accordproject.runtime.Request << (T,yellow) >> {
+}
+org.accordproject.runtime.Request --|> concerto.Transaction
+class org.accordproject.runtime.Response << (T,yellow) >> {
+}
+org.accordproject.runtime.Response --|> concerto.Transaction
+class org.accordproject.runtime.Obligation {
+   + String $identifier
+   + Contract contract
+   + Participant promisor
+   + Participant promisee
+   + DateTime deadline
+}
+org.accordproject.runtime.Obligation --|> concerto.Event
+class org.accordproject.runtime.State << (A,green) >> {
+}
+org.accordproject.runtime.State --|> concerto.Asset
+@enduml
